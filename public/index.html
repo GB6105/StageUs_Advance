@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>제목 입니다.</h1>
+
+    <script>
+        // console.log(1)
+        // setTimeout(()=>{
+        //     console.log(2)
+        // },1000)
+        // console.log(3)
+
+        // setTimeout(1000) // 기본형
+        // //callback함수 : 가장 대표적인 비동기 처리 기법 (비동기함수가 끝나고 처리할 걸 함수로 넣어주는것)
+
+        // addEventListener("click",()=>{
+
+        // })
+        // // 1. callback hell 이라는 코드 구조 문제
+        // //비동기 함수의 결과를 비동기 함수를 돌리고 그 결과를 비동기 함수로 돌린다. 
+        // console.log(1)
+        // setTimeout(()=>{
+        //     console.log(2)
+        //     setTimeout(()=>{
+        //         console.log(2)
+        //         setTimeout(()=>{
+        //             console.log(2)
+        //             },1000)
+        //             console.log(3)
+        //         },1000)
+        //         console.log(3)
+        //     },1000)
+        // console.log(3)
+
+        //callback은 오래된 문법
+        //callback의 단점2개
+        // 2. 코드의 흐름의 방해 (해석할 때 이해가 안감)
+
+        // 해결책 1. ES7에 출시된 then
+        // 아예 EX7에 비동기 함수를 만드는 문법을 새로 출시함 (promise) 두 가지 방식의 비동기 promis callback
+
+        //fetch : 통신 요청 보내는 함수 (프론트엔드 개발자)
+        // call bakcc 처리 못함
+        // const result = fetch("http://loclahost:8000/article",{
+        //     "method": "POST",
+        //     "headers":{
+        //         "Content-Type":"application/json"
+        //     },
+        //     "body": JSON.stringify({
+        //         "title":"test",
+        //         "content":"test"
+        //     })
+        // })
+        // console.log(result) // 오류남 -> 비동기 함수인 fetch를 result로 동기함수처럼 쓰려고 해서
+
+        console.log(1)
+        fetch("/article",{
+            "method": "POST",
+            "headers":{
+                "Content-Type":"application/json"
+            },
+            "body": JSON.stringify({
+                "title":"test",
+                "content":"test"
+            })
+        }).then((response)=>{
+            return response.json() // 출력을 위해서 json화 해야함 return을 붙여줌으로서 밑으로 작성이 가능하다.
+            
+        }).then((result)=>{
+            
+            console.log(result)
+        })
+        console.log(2)
+
+        // 해결책 2 ES8에 출시된 async-await
+
+
+        //동기가 비동기 함수로 변경
+        const asyncFunc = async() => {
+            const response = await fetch("/article",{
+                "method": "POST",
+                "headers":{
+                    "Content-Type":"application/json"
+                },
+                "body": JSON.stringify({
+                    "title":"test",
+                    "content":"test"
+                })
+            })
+            const result = await response.json()
+            console.log(result)
+
+            if(response.status ===200){
+
+            }else if(response.status === 400){
+
+            }else if(response.status === 401){
+
+            }else {
+
+            }
+            //우리가 상태코드를 어떻게 줘야하는 지도 대충 알 수 있음
+            // 프론트엔드에서 분기처리를 하려면, 상태코드를 분리해서 줘야한 다는 것
+        }
+
+        console.log(1)
+        asyncFunc()
+        console.log(2)
+
+        //비동기 함수라는게 결국 오래 걸리는작업 나중에 처리하려고 쓰는 존재
+    </script>
+</body>
+</html>

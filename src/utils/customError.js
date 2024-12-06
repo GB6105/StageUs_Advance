@@ -3,7 +3,7 @@
 const customError = (message,statusCode) => {
     const error = new Error(message)
     error.statusCode = statusCode
-    throw error
+    return error
 }
 
-module.export = customError
+module.exports = customError

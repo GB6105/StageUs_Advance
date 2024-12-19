@@ -2,7 +2,7 @@ const {Client} = require("pg")
 
 const dbInit = {
     "user": "ubuntu",
-    "password":"1234",
+    "password":"6782",
     "host" : "localhost",
     "port" : 5432,
     "database": "web"
